@@ -27,7 +27,7 @@ module Traceur
       <<-SOURCE
         var traceur = require("#{traceur_path}");
         var result  = traceur.compile(#{::JSON.generate(data, quirks_mode: true)}, {
-          filename: '#{module_name(scope.root_path, scope.logical_path)}',
+          filename: '#{file}',
           modules:  '#{Traceur::Config.compile_to}'
         });
 
@@ -37,14 +37,6 @@ module Traceur
 
         return result.js;
       SOURCE
-    end
-
-    def module_name(root_path, logical_path)
-      if prefix = Traceur::Config.lookup_prefix(File.join(root_path, logical_path))
-        File.join(prefix, logical_path)
-      else
-        logical_path
-      end
     end
 
     def traceur_path
