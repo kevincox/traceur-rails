@@ -1,13 +1,9 @@
 module Traceur
   module Config
-    class << self
-      def compile_to
-        @compile_to || :amd
-      end
+    @compile_to = :amd
 
-      def compile_to=(target)
-        @compile_to = target
-      end
+    class << self
+      attr_accessor :compile_to
 
       def prefix_patterns
         @prefix_patterns ||= []
